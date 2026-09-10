@@ -1,0 +1,199 @@
+/* ================================
+   USERS MANAGEMENT PAGE
+================================ */
+
+.users-page {
+    width: 100%;
+}
+
+/* Header */
+.users-page h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+    color: #172033;
+}
+
+.users-page > p {
+    margin: 8px 0 22px;
+    color: #6b7280;
+    font-size: 15px;
+}
+
+
+/* ================================
+   ADD USER BUTTON
+================================ */
+
+.users-page button {
+    font-family: Arial, sans-serif;
+}
+
+.users-page > button {
+    background: #172554;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: all 0.2s ease;
+}
+
+.users-page > button:hover {
+    background: #263b7a;
+    transform: translateY(-1px);
+}
+
+
+/* ================================
+   USERS TABLE
+================================ */
+
+.users-page table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+}
+
+
+/* Table Header */
+
+.users-page thead {
+    background: #f8fafc;
+}
+
+.users-page th {
+    padding: 15px 16px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    color: #475569;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+/* Table Body */
+
+.users-page td {
+    padding: 15px 16px;
+    font-size: 14px;
+    color: #334155;
+    border-bottom: 1px solid #eef2f7;
+}
+
+
+/* Last row */
+
+.users-page tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* Row hover */
+
+.users-page tbody tr {
+    transition: background 0.2s ease;
+}
+
+.users-page tbody tr:hover {
+    background: #f8fafc;
+}
+
+
+/* ================================
+   ROLE BADGES
+================================ */
+
+.users-page td:nth-child(4) {
+    font-weight: 600;
+}
+
+
+/* ================================
+   STATUS
+================================ */
+
+.users-page td:nth-child(6) {
+    font-weight: 600;
+}
+
+
+/* ================================
+   ACTION BUTTONS
+================================ */
+
+.users-page td:last-child {
+    white-space: nowrap;
+}
+
+.users-page td:last-child button {
+    padding: 7px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 6px;
+    transition: all 0.2s ease;
+}
+
+
+/* Edit */
+
+.users-page td:last-child button:first-child {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+}
+
+.users-page td:last-child button:first-child:hover {
+    background: #dbeafe;
+}
+
+
+/* Delete */
+
+.users-page td:last-child button:last-child {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.users-page td:last-child button:last-child:hover {
+    background: #fee2e2;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1000px) {
+
+    .users-page {
+        overflow-x: auto;
+    }
+
+    .users-page table {
+        min-width: 800px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .users-page h1 {
+        font-size: 24px;
+    }
+
+    .users-page > p {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,479 @@
+/* =========================================
+   SALES MANAGEMENT PAGE
+========================================= */
+
+.sales-page {
+    width: 100%;
+    box-sizing: border-box;
+    color: #172033;
+}
+
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.sales-page h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+    color: #172033;
+    letter-spacing: -0.5px;
+}
+
+.sales-page > p {
+    margin: 8px 0 24px;
+    color: #6b7280;
+    font-size: 15px;
+}
+
+
+/* =========================================
+   SUMMARY CARDS
+========================================= */
+
+.sales-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.sales-summary-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-height: 95px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.sales-summary-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.09);
+}
+
+
+/* Summary icon */
+
+.summary-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    background: #eef2ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    flex-shrink: 0;
+}
+
+
+/* Summary label */
+
+.sales-summary-card p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* Summary value */
+
+.sales-summary-card h2 {
+    margin: 6px 0 0;
+    color: #172033;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   CHARTS SECTION
+========================================= */
+
+.sales-charts-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+
+/* Chart card */
+
+.sales-chart-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 22px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+    min-width: 0;
+}
+
+
+/* Chart heading */
+
+.sales-chart-card h2 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 700;
+    color: #172033;
+}
+
+
+/* Chart description */
+
+.sales-chart-card > p {
+    margin: 6px 0 10px;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+
+/* =========================================
+   CHART AREA
+========================================= */
+
+.sales-chart-card .recharts-responsive-container {
+    margin-top: 5px;
+}
+
+
+/* =========================================
+   FILTER SECTION
+========================================= */
+
+.sales-filters {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+}
+
+
+/* Search input */
+
+.sales-filters input[type="text"] {
+    width: 220px;
+}
+
+
+/* All filter inputs */
+
+.sales-filters input,
+.sales-filters select {
+    height: 38px;
+    box-sizing: border-box;
+    padding: 0 11px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #334155;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+
+/* Focus */
+
+.sales-filters input:focus,
+.sales-filters select:focus {
+    border-color: #172554;
+    box-shadow: 0 0 0 3px rgba(23, 37, 84, 0.09);
+}
+
+
+/* Select */
+
+.sales-filters select {
+    min-width: 150px;
+    cursor: pointer;
+}
+
+
+/* Date */
+
+.sales-filters input[type="date"] {
+    min-width: 145px;
+}
+
+
+/* Clear button */
+
+.sales-filters button {
+    height: 38px;
+    padding: 0 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    background: #f8fafc;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sales-filters button:hover {
+    background: #172554;
+    color: #ffffff;
+    border-color: #172554;
+}
+
+
+/* =========================================
+   SALES TABLE
+========================================= */
+
+.sales-page table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+}
+
+
+/* =========================================
+   TABLE HEADER
+========================================= */
+
+.sales-page thead {
+    background: #f8fafc;
+}
+
+.sales-page th {
+    padding: 15px 16px;
+    text-align: left;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 700;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   TABLE BODY
+========================================= */
+
+.sales-page td {
+    padding: 15px 16px;
+    color: #334155;
+    font-size: 14px;
+    border-bottom: 1px solid #eef2f7;
+    white-space: nowrap;
+}
+
+
+/* Last row */
+
+.sales-page tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* Row hover */
+
+.sales-page tbody tr {
+    transition: background 0.2s ease;
+}
+
+.sales-page tbody tr:hover {
+    background: #f8fafc;
+}
+
+
+/* =========================================
+   TABLE IMPORTANT VALUES
+========================================= */
+
+/* ID */
+
+.sales-page td:nth-child(1) {
+    color: #64748b;
+    font-weight: 600;
+}
+
+
+/* Product */
+
+.sales-page td:nth-child(2) {
+    color: #172033;
+    font-weight: 700;
+}
+
+
+/* Category */
+
+.sales-page td:nth-child(3) {
+    color: #475569;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* Quantity */
+
+.sales-page td:nth-child(4) {
+    color: #172033;
+    font-weight: 700;
+}
+
+
+/* Sold By */
+
+.sales-page td:nth-child(5) {
+    color: #172033;
+    font-weight: 600;
+}
+
+
+/* Total Amount */
+
+.sales-page td:nth-child(6) {
+    color: #172033;
+    font-weight: 700;
+}
+
+
+/* Sale Date */
+
+.sales-page td:nth-child(7) {
+    color: #64748b;
+}
+
+
+/* =========================================
+   DELETE BUTTON
+========================================= */
+
+.sales-page td:last-child button {
+    padding: 7px 13px;
+    border-radius: 6px;
+    border: 1px solid #fecaca;
+    background: #fef2f2;
+    color: #dc2626;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sales-page td:last-child button:hover {
+    background: #dc2626;
+    color: #ffffff;
+    border-color: #dc2626;
+}
+
+
+/* =========================================
+   NO SALES FOUND
+========================================= */
+
+.sales-page td[colspan="8"] {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+
+/* =========================================
+   LOADING / ERROR
+========================================= */
+
+.sales-page > h2 {
+    margin: 0;
+    color: #475569;
+    font-size: 19px;
+}
+
+
+/* =========================================
+   RESPONSIVE - TABLET
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .sales-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sales-charts-container {
+        grid-template-columns: 1fr;
+    }
+
+    .sales-chart-card {
+        width: 100%;
+    }
+}
+
+
+/* =========================================
+   RESPONSIVE - MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .sales-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .sales-page h1 {
+        font-size: 25px;
+    }
+
+    .sales-filters {
+        align-items: stretch;
+    }
+
+    .sales-filters input,
+    .sales-filters select,
+    .sales-filters button {
+        width: 100%;
+    }
+
+    .sales-filters input[type="text"] {
+        width: 100%;
+    }
+
+    .sales-filters select {
+        min-width: 0;
+    }
+
+    .sales-page {
+        overflow-x: auto;
+    }
+
+    .sales-charts-container {
+        min-width: 0;
+    }
+
+    .sales-chart-card {
+        padding: 16px;
+    }
+
+    .sales-page table {
+        min-width: 900px;
+    }
+}

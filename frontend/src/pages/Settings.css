@@ -1,0 +1,309 @@
+/* =========================
+   SETTINGS PAGE
+========================= */
+
+.settings-page {
+    min-height: 100vh;
+    padding: 30px;
+    background: #f5f7fb;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1f2937;
+}
+
+
+/* =========================
+   PAGE TITLE
+========================= */
+
+.settings-page > h1 {
+    margin: 0 0 8px;
+    font-size: 30px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.settings-page > p {
+    margin: 0 0 28px;
+    font-size: 15px;
+    color: #6b7280;
+}
+
+
+/* =========================
+   SETTINGS SECTION
+========================= */
+
+.settings-section {
+    max-width: 850px;
+    margin-bottom: 25px;
+    padding: 25px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.settings-section h2 {
+    margin: 0 0 22px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #edf0f4;
+
+    font-size: 20px;
+    font-weight: 650;
+    color: #153a79;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.settings-section form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+
+/* =========================
+   FORM FIELD
+========================= */
+
+.settings-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-field label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+
+/* =========================
+   INPUT
+========================= */
+
+.settings-field input {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 11px 13px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    font-size: 14px;
+    color: #111827;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.settings-field input:focus {
+    border-color: #153a79;
+    box-shadow: 0 0 0 3px rgba(21, 58, 121, 0.1);
+}
+
+
+/* =========================
+   DISABLED ROLE FIELD
+========================= */
+
+.settings-field input:disabled {
+    background: #f3f4f6;
+    color: #6b7280;
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.settings-section button {
+    width: fit-content;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 10px 20px;
+
+    background: #153a79;
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.settings-section button:hover {
+    background: #0f2d5e;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(21, 58, 121, 0.18);
+}
+
+.settings-section button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================
+   FORM SUBMIT BUTTON
+========================= */
+
+.settings-section form > button {
+    grid-column: 1 / -1;
+    margin-top: 4px;
+}
+
+
+/* =========================
+   SUCCESS / ERROR MESSAGE
+========================= */
+
+.settings-section form + p {
+    margin: 18px 0 0;
+
+    padding: 11px 14px;
+
+    border-radius: 8px;
+
+    background: #eef4ff;
+    border: 1px solid #c7d8f6;
+
+    color: #153a79;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+/* =========================
+   ACCOUNT / LOGOUT SECTION
+========================= */
+
+.settings-section:last-of-type p {
+    margin: 0 0 18px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.settings-section:last-of-type button {
+    background: #dc2626;
+}
+
+.settings-section:last-of-type button:hover {
+    background: #b91c1c;
+    box-shadow: 0 4px 10px rgba(220, 38, 38, 0.2);
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.settings-page > h2 {
+    text-align: center;
+    margin-top: 100px;
+
+    font-size: 22px;
+    font-weight: 600;
+
+    color: #153a79;
+}
+
+
+/* =========================
+   OPTIONAL SECTION HOVER
+========================= */
+
+.settings-section {
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.settings-section:hover {
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================
+   RESPONSIVE - TABLET
+========================= */
+
+@media (max-width: 768px) {
+
+    .settings-page {
+        padding: 20px 14px;
+    }
+
+    .settings-page > h1 {
+        font-size: 25px;
+    }
+
+    .settings-section {
+        padding: 20px;
+    }
+
+    .settings-section form {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .settings-section form > button {
+        grid-column: auto;
+    }
+}
+
+
+/* =========================
+   RESPONSIVE - MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+    .settings-page {
+        padding: 15px 10px;
+    }
+
+    .settings-page > h1 {
+        font-size: 22px;
+    }
+
+    .settings-page > p {
+        font-size: 13px;
+    }
+
+    .settings-section {
+        padding: 17px;
+        border-radius: 10px;
+    }
+
+    .settings-section h2 {
+        font-size: 18px;
+    }
+
+    .settings-field input {
+        padding: 10px 11px;
+    }
+
+    .settings-section button {
+        width: 100%;
+    }
+}
