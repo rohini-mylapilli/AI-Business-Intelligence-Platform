@@ -5,7 +5,7 @@ services:
     plan: free
     region: virginia
     buildCommand: bash build.sh
-    startCommand: gunicorn --chdir backend backend.wsgi:application
+    startCommand: gunicorn --chdir backend backend.wsgi:application --bind 0.0.0.0:$PORT
 
     envVars:
       - key: DATABASE_URL
