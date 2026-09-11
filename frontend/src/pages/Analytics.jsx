@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Analytics.css";
+import { API_BASE_URL } from "../api";
 
 import {
     BarChart,
@@ -74,7 +75,7 @@ function Analytics() {
                 const dashboardResponse =
                     await axios.get(
 
-                        "http://127.0.0.1:8000/api/dashboard/",
+                        `${API_BASE_URL}/api/dashboard/`,
 
                         config
 
@@ -86,7 +87,7 @@ function Analytics() {
                 const categoryResponse =
                     await axios.get(
 
-                        "http://127.0.0.1:8000/api/dashboard/sales-by-category/",
+                        `${API_BASE_URL}/api/dashboard/sales-by-category/`,
 
                         config
 
@@ -98,7 +99,7 @@ function Analytics() {
                 const productsResponse =
                     await axios.get(
 
-                        "http://127.0.0.1:8000/api/dashboard/top-selling-products/",
+                        `${API_BASE_URL}/api/dashboard/top-selling-products/`,
 
                         config
 
@@ -110,7 +111,7 @@ function Analytics() {
                 const trendResponse =
                     await axios.get(
 
-                        "http://127.0.0.1:8000/api/dashboard/sales-trend/",
+                        `${API_BASE_URL}/api/dashboard/sales-trend/`,
 
                         config
 

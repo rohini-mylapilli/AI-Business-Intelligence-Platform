@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Products.css";
+import { API_BASE_URL } from "../api";
 
 function Products() {
     const [products, setProducts] = useState([]);
@@ -31,7 +32,7 @@ function Products() {
             console.log("PRODUCT ACCESS TOKEN:", token);
 
             const response = await axios.get(
-                "http://127.0.0.1:8000/api/products/",
+                `${API_BASE_URL}/api/products/`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -41,7 +42,11 @@ function Products() {
 
             console.log("PRODUCTS RESPONSE:", response.data);
 
-            setProducts(response.data);
+            const data = Array.isArray(response.data)
+                ? response.data
+                : response.data.results || [];
+
+            setProducts(data);
         } catch (error) {
             console.error("PRODUCTS FETCH ERROR:", error);
             console.error("STATUS:", error.response?.status);
@@ -127,7 +132,7 @@ function Products() {
                 // UPDATE
                 // =========================
                 const response = await axios.patch(
-                    `http://127.0.0.1:8000/api/products/${editingId}/`,
+                    `${API_BASE_URL}/api/products/${editingId}/`,
                     data,
                     {
                         headers: {
@@ -148,7 +153,7 @@ function Products() {
                 // ADD
                 // =========================
                 const response = await axios.post(
-                    "http://127.0.0.1:8000/api/products/",
+                    `${API_BASE_URL}/api/products/`,
                     data,
                     {
                         headers: {
@@ -166,11 +171,9 @@ function Products() {
                 alert("Product added successfully");
             }
 
-            // Close form
             setShowForm(false);
             setEditingId(null);
 
-            // Clear form
             setFormData({
                 name: "",
                 category: "ELECTRONICS",
@@ -178,7 +181,6 @@ function Products() {
                 stock: "",
             });
 
-            // Refresh product list
             await fetchProducts();
 
         } catch (error) {
@@ -216,7 +218,7 @@ function Products() {
             const token = localStorage.getItem("access");
 
             await axios.delete(
-                `http://127.0.0.1:8000/api/products/${id}/`,
+                `${API_BASE_URL}/api/products/${id}/`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -226,7 +228,6 @@ function Products() {
 
             alert("Product deleted successfully");
 
-            // Remove from UI immediately
             setProducts((previousProducts) =>
                 previousProducts.filter(
                     (product) => product.id !== id
@@ -301,8 +302,6 @@ function Products() {
                             : "Add Product"}
                     </h2>
 
-                    {/* Product Name */}
-
                     <div>
                         <label>Product Name</label>
 
@@ -315,8 +314,6 @@ function Products() {
                             required
                         />
                     </div>
-
-                    {/* Category */}
 
                     <div>
                         <label>Category</label>
@@ -349,8 +346,6 @@ function Products() {
                         </select>
                     </div>
 
-                    {/* Price */}
-
                     <div>
                         <label>Price</label>
 
@@ -364,8 +359,6 @@ function Products() {
                             required
                         />
                     </div>
-
-                    {/* Stock */}
 
                     <div>
                         <label>Stock</label>
@@ -381,15 +374,11 @@ function Products() {
                         />
                     </div>
 
-                    {/* Save / Update */}
-
                     <button type="submit">
                         {editingId
                             ? "Update Product"
                             : "Save Product"}
                     </button>
-
-                    {/* Cancel */}
 
                     <button
                         type="button"
@@ -462,9 +451,12 @@ function Products() {
                                 </td>
 
                                 <td>
-                                    {new Date(
-                                        product.created_at
-                                    ).toLocaleDateString("en-IN")}
+                                    {product.created_at
+                                        ? new Date(
+                                            product.created_at
+                                        ).toLocaleDateString("en-IN")
+                                        : "-"
+                                    }
                                 </td>
 
                                 <td>

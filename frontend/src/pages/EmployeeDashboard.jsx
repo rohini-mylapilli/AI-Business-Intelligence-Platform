@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "./EmployeeDashboard.css";
+import { API_BASE_URL } from "../api";
 
 function EmployeeDashboard({ onLogout }) {
 
@@ -22,6 +23,8 @@ function EmployeeDashboard({ onLogout }) {
 
     const [error, setError] =
         useState("");
+
+
 
 
 
@@ -52,6 +55,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
     // =====================================================
     // BILLING REFS
     // =====================================================
@@ -67,6 +72,8 @@ function EmployeeDashboard({ onLogout }) {
 
     const quantityRef =
         useRef(null);
+
+
 
 
 
@@ -88,6 +95,8 @@ function EmployeeDashboard({ onLogout }) {
         }
 
     };
+
+
 
 
 
@@ -115,6 +124,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
     // =====================================================
     // FETCH PRODUCTS
     // =====================================================
@@ -125,7 +136,7 @@ function EmployeeDashboard({ onLogout }) {
 
             const response =
                 await axios.get(
-                    "http://127.0.0.1:8000/api/products/",
+                    `${API_BASE_URL}/api/products/`,
                     getConfig()
                 );
 
@@ -164,6 +175,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
     // =====================================================
     // FETCH SALES
     // =====================================================
@@ -174,7 +187,7 @@ function EmployeeDashboard({ onLogout }) {
 
             const response =
                 await axios.get(
-                    "http://127.0.0.1:8000/api/sales/",
+                    `${API_BASE_URL}/api/sales/`,
                     getConfig()
                 );
 
@@ -223,6 +236,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
     // =====================================================
     // LOAD DATA
     // =====================================================
@@ -250,6 +265,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
     // =====================================================
     // INITIAL LOAD
     // =====================================================
@@ -259,6 +276,8 @@ function EmployeeDashboard({ onLogout }) {
         loadData();
 
     }, []);
+
+
 
 
 
@@ -301,6 +320,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
     // =====================================================
     // CURRENCY FORMAT
     // =====================================================
@@ -320,6 +341,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
     // =====================================================
     // GET SELECTED PRODUCT
     // =====================================================
@@ -331,6 +354,8 @@ function EmployeeDashboard({ onLogout }) {
                 String(product.id) ===
                 String(selectedProduct)
         );
+
+
 
 
 
@@ -352,6 +377,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
     // =====================================================
     // CREATE BILL
     // =====================================================
@@ -363,6 +390,8 @@ function EmployeeDashboard({ onLogout }) {
         setBillingMessage("");
 
         setBillingError("");
+
+
 
 
 
@@ -384,6 +413,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
         // =================================================
         // CUSTOMER PHONE VALIDATION
         // =================================================
@@ -399,6 +430,8 @@ function EmployeeDashboard({ onLogout }) {
             return;
 
         }
+
+
 
 
 
@@ -420,6 +453,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
         // =================================================
         // QUANTITY VALIDATION
         // =================================================
@@ -438,6 +473,8 @@ function EmployeeDashboard({ onLogout }) {
             return;
 
         }
+
+
 
 
 
@@ -465,9 +502,13 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
         try {
 
             setBillingLoading(true);
+
+
 
 
 
@@ -496,6 +537,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
             // =============================================
             // GET USER ID
             // =============================================
@@ -511,6 +554,8 @@ function EmployeeDashboard({ onLogout }) {
                 );
 
             }
+
+
 
 
 
@@ -558,6 +603,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
             // =============================================
             // CREATE SALE
             // =============================================
@@ -565,7 +612,7 @@ function EmployeeDashboard({ onLogout }) {
             const response =
                 await axios.post(
 
-                    "http://127.0.0.1:8000/api/sales/",
+                    `${API_BASE_URL}/api/sales/`,
 
                     salePayload,
 
@@ -580,6 +627,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
             // =============================================
             // SUCCESS MESSAGE
             // =============================================
@@ -587,6 +636,8 @@ function EmployeeDashboard({ onLogout }) {
             setBillingMessage(
                 "Bill created successfully."
             );
+
+
 
 
 
@@ -604,11 +655,15 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
             // =============================================
             // REFRESH DATA
             // =============================================
 
             await loadData();
+
+
 
 
 
@@ -621,6 +676,8 @@ function EmployeeDashboard({ onLogout }) {
                 customerNameRef.current?.focus();
 
             }, 100);
+
+
 
 
 
@@ -704,6 +761,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
     // =====================================================
     // DASHBOARD PAGE
     // =====================================================
@@ -730,6 +789,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                     <div className="employee-user">
 
                         <span>
@@ -753,6 +814,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                 {error && (
 
                     <div className="employee-error">
@@ -765,7 +828,11 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                 <div className="employee-cards">
+
+
 
 
 
@@ -794,6 +861,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                     <div className="employee-card">
 
                         <div className="employee-card-icon">
@@ -816,6 +885,8 @@ function EmployeeDashboard({ onLogout }) {
                         </p>
 
                     </div>
+
+
 
 
 
@@ -843,6 +914,8 @@ function EmployeeDashboard({ onLogout }) {
                         </p>
 
                     </div>
+
+
 
 
 
@@ -879,6 +952,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
     // =====================================================
     // PRODUCTS PAGE
     // =====================================================
@@ -907,11 +982,15 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                 <div className="employee-section">
 
                     <h2>
                         Available Products
                     </h2>
+
+
 
 
 
@@ -942,6 +1021,8 @@ function EmployeeDashboard({ onLogout }) {
                                 </tr>
 
                             </thead>
+
+
 
 
 
@@ -1012,6 +1093,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
     // =====================================================
     // SALES PAGE
     // =====================================================
@@ -1040,11 +1123,15 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                 <div className="employee-section">
 
                     <h2>
                         Sales History
                     </h2>
+
+
 
 
 
@@ -1083,6 +1170,8 @@ function EmployeeDashboard({ onLogout }) {
                                 </tr>
 
                             </thead>
+
+
 
 
 
@@ -1166,6 +1255,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
     // =====================================================
     // BILLING PAGE
     // =====================================================
@@ -1194,11 +1285,15 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                 <div className="employee-section">
 
                     <h2>
                         Create Customer Bill
                     </h2>
+
+
 
 
 
@@ -1211,6 +1306,8 @@ function EmployeeDashboard({ onLogout }) {
                         </div>
 
                     )}
+
+
 
 
 
@@ -1232,12 +1329,16 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                     <form
                         className="billing-form"
                         onSubmit={
                             handleCreateBill
                         }
                     >
+
+
 
 
 
@@ -1278,6 +1379,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                         {/* CUSTOMER PHONE */}
 
                         <div className="billing-form-group">
@@ -1312,6 +1415,8 @@ function EmployeeDashboard({ onLogout }) {
                             />
 
                         </div>
+
+
 
 
 
@@ -1352,6 +1457,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                                 {products.map(
                                     (product) => (
 
@@ -1386,6 +1493,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                         {/* PRODUCT INFORMATION */}
 
                         {selectedProductData && (
@@ -1410,6 +1519,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                                 <div>
 
                                     <span>
@@ -1425,6 +1536,8 @@ function EmployeeDashboard({ onLogout }) {
                             </div>
 
                         )}
+
+
 
 
 
@@ -1464,6 +1577,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                         {/* TOTAL */}
 
                         <div className="billing-total-box">
@@ -1479,6 +1594,8 @@ function EmployeeDashboard({ onLogout }) {
                             </strong>
 
                         </div>
+
+
 
 
 
@@ -1519,6 +1636,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                             <button
                                 type="submit"
                                 className="employee-primary-btn"
@@ -1545,6 +1664,8 @@ function EmployeeDashboard({ onLogout }) {
         );
 
     };
+
+
 
 
 
@@ -1576,11 +1697,15 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                 <div className="employee-section">
 
                     <h2>
                         My Performance
                     </h2>
+
+
 
 
 
@@ -1600,6 +1725,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                         <div>
 
                             <span>
@@ -1611,6 +1738,8 @@ function EmployeeDashboard({ onLogout }) {
                             </strong>
 
                         </div>
+
+
 
 
 
@@ -1637,6 +1766,8 @@ function EmployeeDashboard({ onLogout }) {
         );
 
     };
+
+
 
 
 
@@ -1668,6 +1799,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                 <div className="employee-section">
 
                     <h2>
@@ -1681,6 +1814,8 @@ function EmployeeDashboard({ onLogout }) {
                             Employee
                         </strong>
                     </p>
+
+
 
 
 
@@ -1698,6 +1833,8 @@ function EmployeeDashboard({ onLogout }) {
         );
 
     };
+
+
 
 
 
@@ -1761,6 +1898,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
     // =====================================================
     // MAIN UI
     // =====================================================
@@ -1771,9 +1910,13 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
             {/* SIDEBAR */}
 
             <aside className="employee-sidebar">
+
+
 
 
 
@@ -1791,7 +1934,11 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                 <nav className="employee-nav">
+
+
 
 
 
@@ -1812,6 +1959,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                     <button
                         className={
                             activePage === "products"
@@ -1826,6 +1975,8 @@ function EmployeeDashboard({ onLogout }) {
                     >
                         📦 Products
                     </button>
+
+
 
 
 
@@ -1846,6 +1997,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                     <button
                         className={
                             activePage === "billing"
@@ -1860,6 +2013,8 @@ function EmployeeDashboard({ onLogout }) {
                     >
                         🧾 Billing
                     </button>
+
+
 
 
 
@@ -1880,6 +2035,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                     <button
                         className={
                             activePage === "settings"
@@ -1897,6 +2054,8 @@ function EmployeeDashboard({ onLogout }) {
 
 
 
+
+
                     <button
                         className="employee-nav-item employee-logout-nav"
                         onClick={
@@ -1909,6 +2068,8 @@ function EmployeeDashboard({ onLogout }) {
                 </nav>
 
             </aside>
+
+
 
 
 

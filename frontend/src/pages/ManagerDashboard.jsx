@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./ManagerDashboard.css";
+import { API_BASE_URL } from "../api";
 
 function ManagerDashboard({
     onLogout,
@@ -141,12 +142,12 @@ function ManagerDashboard({
             ] = await Promise.all([
 
                 axios.get(
-                    "http://127.0.0.1:8000/api/sales/",
+                    `${API_BASE_URL}/api/sales/`,
                     config
                 ),
 
                 axios.get(
-                    "http://127.0.0.1:8000/api/products/",
+                    `${API_BASE_URL}/api/products/`,
                     config
                 )
 
@@ -455,7 +456,7 @@ function ManagerDashboard({
 
                 await axios.patch(
 
-                    `http://127.0.0.1:8000/api/products/${editingProduct.id}/`,
+                    `${API_BASE_URL}/api/products/${editingProduct.id}/`,
 
                     productData,
 
@@ -469,7 +470,7 @@ function ManagerDashboard({
 
                 await axios.post(
 
-                    "http://127.0.0.1:8000/api/products/",
+                    `${API_BASE_URL}/api/products/`,
 
                     productData,
 
@@ -540,7 +541,7 @@ function ManagerDashboard({
 
             const response = await axios.get(
 
-                `http://127.0.0.1:8000/api/products/${product.id}/`,
+                `${API_BASE_URL}/api/products/${product.id}/`,
 
                 getConfig()
 
@@ -650,7 +651,7 @@ function ManagerDashboard({
 
             const response = await axios.post(
 
-                "http://127.0.0.1:8000/api/auth/change-password/",
+                `${API_BASE_URL}/api/auth/change-password/`,
 
                 {
                     current_password:

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Reports.css";
+import { API_BASE_URL } from "../api";
 
 function Reports() {
     const [reports, setReports] = useState([]);
@@ -26,7 +27,7 @@ function Reports() {
             }
 
             const response = await axios.get(
-                "http://127.0.0.1:8000/api/reports/",
+                `${API_BASE_URL}/api/reports/`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -35,10 +36,6 @@ function Reports() {
             );
 
             console.log("REPORTS RESPONSE:", response.data);
-
-            // Backend may return:
-            // 1. Direct array
-            // 2. Paginated object with results
 
             const reportData = Array.isArray(response.data)
                 ? response.data
@@ -164,8 +161,6 @@ function Reports() {
 
             <div className="reports-summary">
 
-                {/* TOTAL REPORTS */}
-
                 <div className="report-summary-card">
 
                     <p>
@@ -178,8 +173,6 @@ function Reports() {
 
                 </div>
 
-
-                {/* PENDING */}
 
                 <div className="report-summary-card">
 
@@ -199,8 +192,6 @@ function Reports() {
                 </div>
 
 
-                {/* SUBMITTED */}
-
                 <div className="report-summary-card">
 
                     <p>
@@ -218,8 +209,6 @@ function Reports() {
 
                 </div>
 
-
-                {/* REVIEWED */}
 
                 <div className="report-summary-card">
 
@@ -307,14 +296,9 @@ function Reports() {
                                         key={report.id}
                                     >
 
-                                        {/* ID */}
-
                                         <td>
                                             {report.id}
                                         </td>
-
-
-                                        {/* EMPLOYEE */}
 
                                         <td>
                                             {
@@ -324,17 +308,11 @@ function Reports() {
                                             }
                                         </td>
 
-
-                                        {/* REPORT DATE */}
-
                                         <td>
                                             {
                                                 report.report_date
                                             }
                                         </td>
-
-
-                                        {/* TOTAL SALES */}
 
                                         <td>
 
@@ -347,17 +325,11 @@ function Reports() {
 
                                         </td>
 
-
-                                        {/* PRODUCTS SOLD */}
-
                                         <td>
                                             {
                                                 report.products_sold || 0
                                             }
                                         </td>
-
-
-                                        {/* STATUS */}
 
                                         <td>
 
@@ -373,9 +345,6 @@ function Reports() {
                                             </span>
 
                                         </td>
-
-
-                                        {/* ACTION */}
 
                                         <td>
 
@@ -428,8 +397,6 @@ function Reports() {
 
                     <div className="report-details-content">
 
-                        {/* REPORT ID */}
-
                         <p>
 
                             <strong>
@@ -444,8 +411,6 @@ function Reports() {
 
                         </p>
 
-
-                        {/* EMPLOYEE */}
 
                         <p>
 
@@ -464,8 +429,6 @@ function Reports() {
                         </p>
 
 
-                        {/* REPORT DATE */}
-
                         <p>
 
                             <strong>
@@ -480,8 +443,6 @@ function Reports() {
 
                         </p>
 
-
-                        {/* TOTAL SALES */}
 
                         <p>
 
@@ -501,8 +462,6 @@ function Reports() {
                         </p>
 
 
-                        {/* PRODUCTS SOLD */}
-
                         <p>
 
                             <strong>
@@ -517,8 +476,6 @@ function Reports() {
 
                         </p>
 
-
-                        {/* STATUS */}
 
                         <p>
 
@@ -535,8 +492,6 @@ function Reports() {
 
                         </p>
 
-
-                        {/* DESCRIPTION */}
 
                         <div>
 
@@ -556,8 +511,6 @@ function Reports() {
                         </div>
 
 
-                        {/* CREATED AT */}
-
                         <p>
 
                             <strong>
@@ -573,8 +526,6 @@ function Reports() {
 
                         </p>
 
-
-                        {/* UPDATED AT */}
 
                         <p>
 

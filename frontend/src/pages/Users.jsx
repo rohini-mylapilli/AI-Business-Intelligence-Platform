@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Users.css";
+import { API_BASE_URL } from "../api";
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -18,7 +19,6 @@ function Users() {
     role: "EMPLOYEE",
   });
 
-  // Get logged-in admin ID
   const getCurrentUserId = () => {
     const username = localStorage.getItem("username");
 
@@ -29,7 +29,6 @@ function Users() {
     return currentUser ? currentUser.id : null;
   };
 
-  // Fetch users
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -37,20 +36,21 @@ function Users() {
   const fetchUsers = async () => {
     try {
       const accessToken = localStorage.getItem("access");
-      console.log("ACCESS TOKEN:", accessToken);
 
       const response = await axios.get(
-        "http://127.0.0.1:8000/api/auth/users/",
+        `${API_BASE_URL}/api/auth/users/`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         }
       );
-      console.log("USER RESPONSE:", response.data);
 
-      setUsers(response.data);
+      const userData = Array.isArray(response.data)
+        ? response.data
+        : response.data.results || [];
 
+      setUsers(userData);
     } catch (error) {
       console.error("USER ERROR:", error);
     } finally {
@@ -58,7 +58,6 @@ function Users() {
     }
   };
 
-  // Input change
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -66,7 +65,6 @@ function Users() {
     });
   };
 
-  // Open Add User form
   const openAddForm = () => {
     setEditingUser(null);
 
@@ -82,7 +80,6 @@ function Users() {
     setShowForm(true);
   };
 
-  // Open Edit form
   const handleEdit = (user) => {
     setEditingUser(user);
 
@@ -102,7 +99,6 @@ function Users() {
     setShowForm(true);
   };
 
-  // Create / Update user
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -114,8 +110,6 @@ function Users() {
       };
 
       if (editingUser) {
-
-        // UPDATE
         const updateData = {
           first_name: formData.first_name,
           last_name: formData.last_name,
@@ -124,24 +118,20 @@ function Users() {
           role: formData.role,
         };
 
-        // Password only if entered
         if (formData.password.trim() !== "") {
           updateData.password = formData.password;
         }
 
         await axios.patch(
-          `http://127.0.0.1:8000/api/auth/users/${editingUser.id}/`,
+          `${API_BASE_URL}/api/auth/users/${editingUser.id}/`,
           updateData,
           { headers }
         );
 
         alert("User updated successfully");
-
       } else {
-
-        // CREATE
         await axios.post(
-          "http://127.0.0.1:8000/api/auth/users/",
+          `${API_BASE_URL}/api/auth/users/`,
           formData,
           { headers }
         );
@@ -161,22 +151,22 @@ function Users() {
         role: "EMPLOYEE",
       });
 
-      fetchUsers();
-
+      await fetchUsers();
     } catch (error) {
       console.error("Save user error:", error);
 
       if (error.response) {
-        console.error("Backend error:", error.response.data);
-        alert("Operation failed. Check console.");
+        alert(
+          error.response.data?.error ||
+          "Operation failed. Check console."
+        );
+      } else {
+        alert("Unable to save user.");
       }
     }
   };
 
-  // Delete user
   const handleDelete = async (user) => {
-
-    // Prevent deleting current admin
     const currentUserId = getCurrentUserId();
 
     if (currentUserId === user.id) {
@@ -196,7 +186,7 @@ function Users() {
       const accessToken = localStorage.getItem("access");
 
       await axios.delete(
-        `http://127.0.0.1:8000/api/auth/users/${user.id}/`,
+        `${API_BASE_URL}/api/auth/users/${user.id}/`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -206,17 +196,17 @@ function Users() {
 
       alert("User deleted successfully");
 
-      fetchUsers();
-
+      await fetchUsers();
     } catch (error) {
       console.error("Delete user error:", error);
 
       if (error.response) {
-        console.error("Backend error:", error.response.data);
         alert(
-          error.response.data.error ||
+          error.response.data?.error ||
           "Unable to delete user"
         );
+      } else {
+        alert("Unable to delete user");
       }
     }
   };
@@ -230,13 +220,10 @@ function Users() {
         Manage Admins, Managers and Employees
       </p>
 
-      {/* Add User Button */}
       <button onClick={openAddForm}>
         Add User
       </button>
 
-
-      {/* Add / Edit Form */}
       {showForm && (
         <form onSubmit={handleSubmit}>
 
@@ -299,17 +286,9 @@ function Users() {
             value={formData.role}
             onChange={handleChange}
           >
-            <option value="ADMIN">
-              Admin
-            </option>
-
-            <option value="MANAGER">
-              Manager
-            </option>
-
-            <option value="EMPLOYEE">
-              Employee
-            </option>
+            <option value="ADMIN">Admin</option>
+            <option value="MANAGER">Manager</option>
+            <option value="EMPLOYEE">Employee</option>
           </select>
 
           <button type="submit">
@@ -331,8 +310,6 @@ function Users() {
         </form>
       )}
 
-
-      {/* Users Table */}
       <table>
 
         <thead>
@@ -355,21 +332,17 @@ function Users() {
                 Loading users...
               </td>
             </tr>
-
           ) : users.length === 0 ? (
             <tr>
               <td colSpan="7">
                 No users found
               </td>
             </tr>
-
           ) : (
             users.map((user) => (
               <tr key={user.id}>
 
-                <td>
-                  {user.id}
-                </td>
+                <td>{user.id}</td>
 
                 <td>
                   {user.name || "-"}
@@ -392,7 +365,6 @@ function Users() {
                 </td>
 
                 <td>
-
                   <button
                     onClick={() => handleEdit(user)}
                   >
@@ -405,12 +377,17 @@ function Users() {
                     Delete
                   </button>
                 </td>
+
               </tr>
             ))
           )}
+
         </tbody>
+
       </table>
+
     </div>
   );
 }
+
 export default Users;

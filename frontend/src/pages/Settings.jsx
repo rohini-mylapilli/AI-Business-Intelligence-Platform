@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Settings.css";
+import { API_BASE_URL } from "../api";
 
 function Settings() {
-
     const [profile, setProfile] = useState({
         first_name: "",
         last_name: "",
@@ -22,22 +22,18 @@ function Settings() {
 
     const [loading, setLoading] = useState(true);
 
-
     // =====================================================
     // GET CURRENT USER PROFILE
     // =====================================================
 
     useEffect(() => {
-
         const fetchProfile = async () => {
-
             try {
-
                 const token =
                     localStorage.getItem("access");
 
                 const response = await axios.get(
-                    "http://127.0.0.1:8000/api/accounts/profile/",
+                    `${API_BASE_URL}/api/accounts/profile/`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -53,7 +49,6 @@ function Settings() {
                 setProfile(response.data);
 
             } catch (error) {
-
                 console.error(
                     "PROFILE ERROR:",
                     error
@@ -70,51 +65,42 @@ function Settings() {
                 );
 
             } finally {
-
                 setLoading(false);
-
             }
-
         };
 
         fetchProfile();
 
     }, []);
 
-
     // =====================================================
     // PROFILE INPUT CHANGE
     // =====================================================
 
     const handleProfileChange = (e) => {
-
         const { name, value } = e.target;
 
         setProfile((previousProfile) => ({
             ...previousProfile,
             [name]: value,
         }));
-
     };
-
 
     // =====================================================
     // UPDATE PROFILE
     // =====================================================
 
     const handleProfileSubmit = async (e) => {
-
         e.preventDefault();
 
         setProfileMessage("");
 
         try {
-
             const token =
                 localStorage.getItem("access");
 
             const response = await axios.patch(
-                "http://127.0.0.1:8000/api/accounts/profile/",
+                `${API_BASE_URL}/api/accounts/profile/`,
                 {
                     first_name: profile.first_name,
                     last_name: profile.last_name,
@@ -142,7 +128,6 @@ function Settings() {
             );
 
         } catch (error) {
-
             console.error(
                 "PROFILE UPDATE ERROR:",
                 error
@@ -162,45 +147,37 @@ function Settings() {
                 error.response?.data?.error ||
                 "Unable to update profile."
             );
-
         }
-
     };
-
 
     // =====================================================
     // PASSWORD INPUT CHANGE
     // =====================================================
 
     const handlePasswordChange = (e) => {
-
         const { name, value } = e.target;
 
         setPasswordData((previousData) => ({
             ...previousData,
             [name]: value,
         }));
-
     };
-
 
     // =====================================================
     // CHANGE PASSWORD
     // =====================================================
 
     const handlePasswordSubmit = async (e) => {
-
         e.preventDefault();
 
         setPasswordMessage("");
 
         try {
-
             const token =
                 localStorage.getItem("access");
 
             const response = await axios.post(
-                "http://127.0.0.1:8000/api/accounts/change-password/",
+                `${API_BASE_URL}/api/accounts/change-password/`,
                 passwordData,
                 {
                     headers: {
@@ -224,7 +201,6 @@ function Settings() {
             });
 
         } catch (error) {
-
             console.error(
                 "PASSWORD CHANGE ERROR:",
                 error
@@ -244,18 +220,14 @@ function Settings() {
                 error.response?.data?.error ||
                 "Unable to change password."
             );
-
         }
-
     };
-
 
     // =====================================================
     // LOGOUT
     // =====================================================
 
     const handleLogout = () => {
-
         const confirmLogout = window.confirm(
             "Are you sure you want to logout?"
         );
@@ -269,35 +241,27 @@ function Settings() {
         localStorage.removeItem("user");
 
         window.location.href = "/";
-
     };
-
 
     // =====================================================
     // LOADING
     // =====================================================
 
     if (loading) {
-
         return (
             <div className="settings-page">
-
                 <h2>
                     Loading Settings...
                 </h2>
-
             </div>
         );
-
     }
-
 
     // =====================================================
     // UI
     // =====================================================
 
     return (
-
         <div className="settings-page">
 
             <h1>
@@ -308,11 +272,6 @@ function Settings() {
                 Manage your account and security settings.
             </p>
 
-
-            {/* =================================================
-                PROFILE SETTINGS
-            ================================================= */}
-
             <section className="settings-section">
 
                 <h2>
@@ -322,8 +281,6 @@ function Settings() {
                 <form
                     onSubmit={handleProfileSubmit}
                 >
-
-                    {/* FIRST NAME */}
 
                     <div className="settings-field">
 
@@ -340,9 +297,6 @@ function Settings() {
 
                     </div>
 
-
-                    {/* LAST NAME */}
-
                     <div className="settings-field">
 
                         <label>
@@ -357,9 +311,6 @@ function Settings() {
                         />
 
                     </div>
-
-
-                    {/* USERNAME */}
 
                     <div className="settings-field">
 
@@ -376,9 +327,6 @@ function Settings() {
 
                     </div>
 
-
-                    {/* EMAIL */}
-
                     <div className="settings-field">
 
                         <label>
@@ -394,9 +342,6 @@ function Settings() {
 
                     </div>
 
-
-                    {/* ROLE */}
-
                     <div className="settings-field">
 
                         <label>
@@ -411,28 +356,19 @@ function Settings() {
 
                     </div>
 
-
                     <button type="submit">
                         Update Profile
                     </button>
 
                 </form>
 
-
                 {profileMessage && (
-
                     <p>
                         {profileMessage}
                     </p>
-
                 )}
 
             </section>
-
-
-            {/* =================================================
-                SECURITY
-            ================================================= */}
 
             <section className="settings-section">
 
@@ -443,8 +379,6 @@ function Settings() {
                 <form
                     onSubmit={handlePasswordSubmit}
                 >
-
-                    {/* CURRENT PASSWORD */}
 
                     <div className="settings-field">
 
@@ -464,9 +398,6 @@ function Settings() {
 
                     </div>
 
-
-                    {/* NEW PASSWORD */}
-
                     <div className="settings-field">
 
                         <label>
@@ -485,28 +416,19 @@ function Settings() {
 
                     </div>
 
-
                     <button type="submit">
                         Change Password
                     </button>
 
                 </form>
 
-
                 {passwordMessage && (
-
                     <p>
                         {passwordMessage}
                     </p>
-
                 )}
 
             </section>
-
-
-            {/* =================================================
-                LOGOUT
-            ================================================= */}
 
             <section className="settings-section">
 
@@ -528,9 +450,7 @@ function Settings() {
             </section>
 
         </div>
-
     );
-
 }
 
 export default Settings;

@@ -9,6 +9,7 @@ import Products from "./Products";
 import Analytics from "./Analytics";
 import Reports from "./Reports";
 import Settings from "./Settings";
+import { API_BASE_URL } from "../api";
 
 
 function AdminDashboard({ onLogout }) {
@@ -39,7 +40,7 @@ function AdminDashboard({ onLogout }) {
                 const accessToken = localStorage.getItem("access");
 
                 const response = await axios.get(
-                    "http://127.0.0.1:8000/api/dashboard/",
+                    `${API_BASE_URL}/api/dashboard/`,
                     {
                         headers: {
                             Authorization: `Bearer ${accessToken}`,

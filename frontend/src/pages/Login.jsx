@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "./Login.css";
-
+import { API_BASE_URL } from "../api";
 
 function UserIcon() {
     return (
@@ -21,6 +21,7 @@ function UserIcon() {
         </svg>
     );
 }
+
 
 
 function LockIcon() {
@@ -45,6 +46,7 @@ function LockIcon() {
 }
 
 
+
 function EyeIcon() {
     return (
         <svg
@@ -65,6 +67,7 @@ function EyeIcon() {
 }
 
 
+
 function ShieldIcon() {
     return (
         <svg
@@ -83,6 +86,7 @@ function ShieldIcon() {
 }
 
 
+
 function Login({ onLoginSuccess }) {
 
     const [username, setUsername] =
@@ -98,6 +102,7 @@ function Login({ onLoginSuccess }) {
         useState(false);
 
 
+
     // =====================================================
     // LOGIN
     // =====================================================
@@ -111,14 +116,17 @@ function Login({ onLoginSuccess }) {
         );
 
 
+
         if (loading) {
             return;
         }
 
 
+
         try {
 
             setLoading(true);
+
 
 
             // =================================================
@@ -127,7 +135,7 @@ function Login({ onLoginSuccess }) {
 
             const response = await axios.post(
 
-                "http://127.0.0.1:8000/api/auth/login/",
+                `${API_BASE_URL}/api/auth/login/`,
 
                 {
                     username: username,
@@ -137,10 +145,12 @@ function Login({ onLoginSuccess }) {
             );
 
 
+
             console.log(
                 "LOGIN RESPONSE:",
                 response.data
             );
+
 
 
             // =================================================
@@ -154,6 +164,7 @@ function Login({ onLoginSuccess }) {
                 response.data.refresh;
 
 
+
             if (!accessToken) {
 
                 throw new Error(
@@ -161,6 +172,7 @@ function Login({ onLoginSuccess }) {
                 );
 
             }
+
 
 
             // =================================================
@@ -178,9 +190,11 @@ function Login({ onLoginSuccess }) {
             );
 
 
+
             console.log(
                 "JWT TOKENS SAVED"
             );
+
 
 
             // =================================================
@@ -190,7 +204,7 @@ function Login({ onLoginSuccess }) {
             const profileResponse =
                 await axios.get(
 
-                    "http://127.0.0.1:8000/api/auth/profile/",
+                    `${API_BASE_URL}/api/auth/profile/`,
 
                     {
                         headers: {
@@ -204,10 +218,12 @@ function Login({ onLoginSuccess }) {
                 );
 
 
+
             console.log(
                 "PROFILE RESPONSE:",
                 profileResponse.data
             );
+
 
 
             // =================================================
@@ -218,8 +234,10 @@ function Login({ onLoginSuccess }) {
                 profileResponse.data;
 
 
+
             const role =
                 user.role;
+
 
 
             console.log(
@@ -228,10 +246,12 @@ function Login({ onLoginSuccess }) {
             );
 
 
+
             console.log(
                 "USER ROLE:",
                 role
             );
+
 
 
             // =================================================
@@ -245,6 +265,7 @@ function Login({ onLoginSuccess }) {
             ];
 
 
+
             if (
                 !allowedRoles.includes(role)
             ) {
@@ -254,6 +275,7 @@ function Login({ onLoginSuccess }) {
                 );
 
             }
+
 
 
             // =================================================
@@ -266,16 +288,19 @@ function Login({ onLoginSuccess }) {
             );
 
 
+
             localStorage.setItem(
                 "user",
                 JSON.stringify(user)
             );
 
 
+
             console.log(
                 "ROLE SAVED:",
                 role
             );
+
 
 
             // =================================================
@@ -287,11 +312,13 @@ function Login({ onLoginSuccess }) {
             );
 
 
+
             // =================================================
             // STEP 9: SEND ROLE TO APP.JSX
             // =================================================
 
             onLoginSuccess(role);
+
 
 
         } catch (error) {
@@ -302,16 +329,19 @@ function Login({ onLoginSuccess }) {
             );
 
 
+
             console.error(
                 "STATUS:",
                 error.response?.status
             );
 
 
+
             console.error(
                 "DATA:",
                 error.response?.data
             );
+
 
 
             // =================================================
@@ -333,6 +363,7 @@ function Login({ onLoginSuccess }) {
             localStorage.removeItem(
                 "user"
             );
+
 
 
             // =================================================
@@ -386,6 +417,7 @@ function Login({ onLoginSuccess }) {
     };
 
 
+
     // =====================================================
     // UI
     // =====================================================
@@ -393,6 +425,7 @@ function Login({ onLoginSuccess }) {
     return (
 
         <div className="login-page">
+
 
 
             {/* ============================================
@@ -404,9 +437,11 @@ function Login({ onLoginSuccess }) {
             ></div>
 
 
+
             <div
                 className="background-circle circle-right"
             ></div>
+
 
 
             <div
@@ -414,9 +449,11 @@ function Login({ onLoginSuccess }) {
             ></div>
 
 
+
             <div
                 className="glow-dot dot-one"
             ></div>
+
 
 
             <div
@@ -424,9 +461,11 @@ function Login({ onLoginSuccess }) {
             ></div>
 
 
+
             <div
                 className="glow-dot dot-three"
             ></div>
+
 
 
             {/* ============================================
@@ -446,6 +485,7 @@ function Login({ onLoginSuccess }) {
             </div>
 
 
+
             <div
                 className="graph graph-right"
             >
@@ -459,6 +499,7 @@ function Login({ onLoginSuccess }) {
             </div>
 
 
+
             {/* ============================================
                 LOGIN CARD
             ============================================ */}
@@ -466,7 +507,9 @@ function Login({ onLoginSuccess }) {
             <div className="login-card">
 
 
+
                 <div className="login-content">
+
 
 
                     {/* ========================================
@@ -478,9 +521,11 @@ function Login({ onLoginSuccess }) {
                     </div>
 
 
+
                     <h1>
                         AI Business Intelligence
                     </h1>
+
 
 
                     <div className="title-decoration">
@@ -494,12 +539,14 @@ function Login({ onLoginSuccess }) {
                     </div>
 
 
+
                     <p className="subtitle">
 
                         Intelligent insights for smarter
                         business decisions
 
                     </p>
+
 
 
                     {/* ========================================
@@ -509,6 +556,7 @@ function Login({ onLoginSuccess }) {
                     <form
                         onSubmit={handleLogin}
                     >
+
 
 
                         {/* ====================================
@@ -522,9 +570,11 @@ function Login({ onLoginSuccess }) {
                             </label>
 
 
+
                             <div className="input-box">
 
                                 <UserIcon />
+
 
 
                                 <input
@@ -552,6 +602,7 @@ function Login({ onLoginSuccess }) {
                         </div>
 
 
+
                         {/* ====================================
                             PASSWORD
                         ==================================== */}
@@ -563,9 +614,11 @@ function Login({ onLoginSuccess }) {
                             </label>
 
 
+
                             <div className="input-box">
 
                                 <LockIcon />
+
 
 
                                 <input
@@ -593,6 +646,7 @@ function Login({ onLoginSuccess }) {
                                 />
 
 
+
                                 <button
 
                                     type="button"
@@ -618,6 +672,7 @@ function Login({ onLoginSuccess }) {
                         </div>
 
 
+
                         {/* ====================================
                             LOGIN BUTTON
                         ==================================== */}
@@ -641,6 +696,7 @@ function Login({ onLoginSuccess }) {
                             </span>
 
 
+
                             <span className="login-arrow">
 
                                 {loading
@@ -652,7 +708,9 @@ function Login({ onLoginSuccess }) {
                         </button>
 
 
+
                     </form>
+
 
 
                     {/* ========================================
@@ -672,6 +730,7 @@ function Login({ onLoginSuccess }) {
                     </div>
 
 
+
                 </div>
 
             </div>
@@ -681,6 +740,7 @@ function Login({ onLoginSuccess }) {
     );
 
 }
+
 
 
 export default Login;
