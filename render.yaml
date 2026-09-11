@@ -5,7 +5,7 @@ services:
     plan: free
     region: virginia
     buildCommand: bash build.sh
-    startCommand: gunicorn backend.wsgi:application
+    startCommand: gunicorn --chdir backend backend.wsgi:application
 
     envVars:
       - key: DATABASE_URL
