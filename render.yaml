@@ -28,9 +28,6 @@ services:
       - key: DJANGO_SUPERUSER_EMAIL
         value: "rohini@example.com"
 
-      - key: DJANGO_SUPERUSER_PASSWORD
-        generateValue: true
-
 databases:
   - name: ai-business-db
     plan: free
