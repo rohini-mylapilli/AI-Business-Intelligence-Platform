@@ -1,12 +1,31 @@
 # AI Business Intelligence Platform with Machine Learning
 
+A full-stack Business Intelligence and Management Platform built with Django REST Framework, React.js, relational databases, and Machine Learning.
+
+---
+
+## Live Demo
+
+**Frontend Application:**  
+https://ai-business-intelligence-platform-1.onrender.com
+
+**Backend API:**  
+https://ai-business-intelligence-platform-0fkp.onrender.com
+
+**Source Code:**  
+https://github.com/rohini-mylapilli/AI-Business-Intelligence-Platform
+
+> The application is deployed on Render. PostgreSQL is used as the production database, while MySQL is used for local development.
+
+> The backend is hosted on Render's free service and may take a short time to wake up after a period of inactivity.
+
 ---
 
 # Project Overview
 
-The **AI Business Intelligence Platform** is a full-stack business management and analytics application developed using **Python, Django, Django REST Framework, React.js, MySQL, and Machine Learning**.
+The **AI Business Intelligence Platform** is a full-stack business management and analytics application developed using **Python, Django, Django REST Framework, React.js, MySQL, PostgreSQL, and Machine Learning**.
 
-The platform helps businesses manage daily operations and analyze performance through centralized dashboards, reports, role-based access, and predictive insights.
+The platform helps businesses manage daily operations and analyze performance through centralized dashboards, reports, role-based access, business analytics, and predictive insights.
 
 The system enables users to:
 
@@ -18,7 +37,7 @@ The system enables users to:
 * Monitor business analytics
 * Track revenue and sales performance
 * Use machine learning for sales prediction
-* Access data through REST APIs
+* Access business data through REST APIs
 
 ---
 
@@ -27,11 +46,12 @@ The system enables users to:
 * Build a centralized business management platform.
 * Implement secure role-based authentication.
 * Develop REST APIs using Django REST Framework.
-* Integrate React frontend with Django backend.
+* Integrate a React frontend with a Django backend.
 * Manage product and sales operations.
 * Provide daily reporting functionality.
 * Generate business analytics and dashboards.
 * Integrate machine learning for sales prediction.
+* Deploy the complete application to a production environment.
 * Build a scalable foundation for future AI-based business intelligence.
 
 ---
@@ -49,23 +69,26 @@ The system enables users to:
                       v
           Django REST Framework
                       |
-               JWT Authentication
+             JWT Authentication
                       |
               Role Permissions
                       |
               Business Logic
                       |
-                 Serializers
+                Serializers
                       |
                 Django Models
                       |
-                    MySQL
-                      |
-              Analytics Module
-                      |
-           Machine Learning Model
-                      |
-              Sales Prediction
+                Database Layer
+                 /          \
+                /            \
+     MySQL (Local)     PostgreSQL (Production)
+                              |
+                      Analytics Module
+                              |
+                   Machine Learning Model
+                              |
+                      Sales Prediction
 ```
 
 ---
@@ -95,7 +118,7 @@ AI-Business-Intelligence-Platform/
 |   |   |
 |   |   |-- assets/
 |   |   |-- pages/
-|   |   |
+|   |   |-- api.js
 |   |   |-- App.jsx
 |   |   `-- main.jsx
 |   |
@@ -104,6 +127,8 @@ AI-Business-Intelligence-Platform/
 |
 |-- .env
 |-- .gitignore
+|-- build.sh
+|-- render.yaml
 |-- README.md
 `-- requirements.txt
 ```
@@ -173,6 +198,7 @@ Responsible for:
 
 Responsible for displaying important business information such as:
 
+* Total Users
 * Total Products
 * Total Sales
 * Total Reports
@@ -293,6 +319,7 @@ Manager Dashboard
 Employee Dashboard
 Products
 Sales
+Billing
 Reports
 Analytics
 Users
@@ -318,16 +345,25 @@ Settings
 * Django REST Framework
 * JWT Authentication
 * Django CORS Headers
+* Gunicorn
 
 ## Database
 
-* MySQL
+* MySQL — Local Development
+* PostgreSQL — Production
 
 ## Machine Learning
 
 * NumPy
 * Pandas
 * Scikit-learn
+
+## Deployment
+
+* Render Web Service — Django Backend
+* Render Static Site — React Frontend
+* Render PostgreSQL — Production Database
+* Gunicorn — Production WSGI Server
 
 ## Development Tools
 
@@ -377,7 +413,8 @@ Serializers
 Models
       |
       v
-MySQL Database
+Database
+(MySQL Local / PostgreSQL Production)
       |
       v
 JSON Response
@@ -408,18 +445,53 @@ Business Insights
 
 ---
 
+# Production Architecture
+
+```text
+User Browser
+     |
+     v
+React Frontend
+(Render Static Site)
+     |
+     v
+Django REST API
+(Render Web Service)
+     |
+     v
+PostgreSQL
+(Render Database)
+```
+
+The frontend communicates with the production Django REST API using environment-based API configuration.
+
+Production security configuration includes:
+
+* `DEBUG=False`
+* Environment-based Django Secret Key
+* Production `ALLOWED_HOSTS`
+* Restricted CORS origins
+* Trusted CSRF origins
+* HTTPS connections
+* Environment-based database configuration
+
+---
+
 # Installation
 
 ## Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/rohini-mylapilli/AI-Business-Intelligence-Platform.git
+
 cd AI-Business-Intelligence-Platform
 ```
 
 ---
 
 ## Create Virtual Environment
+
+### Windows
 
 ```bash
 python -m venv venv
@@ -444,18 +516,34 @@ Create a `.env` file in the project root.
 AI-Business-Intelligence-Platform/.env
 ```
 
-Add:
+Example local development configuration:
 
 ```env
 DJANGO_SECRET_KEY=your_django_secret_key
+
+DEBUG=True
+
+ALLOWED_HOSTS=localhost,127.0.0.1
+
+DB_NAME=ai_business_intelligence
+DB_USER=root
 DB_PASSWORD=your_mysql_password
+DB_HOST=localhost
+DB_PORT=3306
+
+CORS_ALLOWED_ORIGINS=http://localhost:5173
+CSRF_TRUSTED_ORIGINS=http://localhost:5173
 ```
 
-The `.env` file should never be committed to GitHub.
+The `.env` file contains sensitive information and should never be committed to GitHub.
+
+Production configuration is managed securely through environment variables on Render.
 
 ---
 
-# Database Setup
+# Local Database Setup
+
+The application uses **MySQL for local development**.
 
 Create the MySQL database:
 
@@ -469,9 +557,13 @@ Then apply migrations:
 python backend/manage.py migrate
 ```
 
+In production, the application automatically connects to **PostgreSQL** using the configured `DATABASE_URL`.
+
 ---
 
-# Run Backend
+# Run Backend Locally
+
+From the project root:
 
 ```bash
 python backend/manage.py runserver
@@ -485,7 +577,7 @@ http://127.0.0.1:8000/
 
 ---
 
-# Run Frontend
+# Run Frontend Locally
 
 Open a new terminal:
 
@@ -500,6 +592,45 @@ Default frontend URL:
 ```text
 http://localhost:5173/
 ```
+
+For local development, both the Django backend and React frontend should be running.
+
+For normal production use or demonstration, the deployed application can be accessed directly through the Live Demo URL without starting the local servers.
+
+---
+
+# Production Deployment
+
+The application is deployed using Render.
+
+## Frontend
+
+The React/Vite frontend is deployed as a **Render Static Site**.
+
+```text
+https://ai-business-intelligence-platform-1.onrender.com
+```
+
+## Backend
+
+The Django REST Framework backend is deployed as a **Render Web Service** using Gunicorn.
+
+```text
+https://ai-business-intelligence-platform-0fkp.onrender.com
+```
+
+## Production Database
+
+Production data is stored in **Render PostgreSQL**.
+
+The project therefore uses:
+
+```text
+Local Development  -> MySQL
+Production         -> PostgreSQL
+```
+
+This separation allows local development and testing without affecting production data.
 
 ---
 
@@ -553,11 +684,8 @@ python backend/manage.py test
 
 ```bash
 git status
-
 git add .
-
 git commit -m "Update project"
-
 git push origin main
 ```
 
@@ -568,6 +696,7 @@ git push origin main
 The project has been tested for:
 
 * Authentication
+* JWT-based authorization
 * Role-based access
 * Admin Dashboard
 * Manager Dashboard
@@ -580,6 +709,12 @@ The project has been tested for:
 * Machine learning functionality
 * Database migrations
 * Frontend and backend integration
+* Production PostgreSQL integration
+* Production frontend-to-backend communication
+* Admin production login
+* Manager production login
+* Employee production login
+* Production business data
 
 Django system verification:
 
@@ -612,33 +747,45 @@ media/
 staticfiles/
 ```
 
+Database exports, migration fixtures, credentials, secret keys, and other sensitive production data should also never be committed to the repository.
+
 For production deployment:
 
-* Set `DEBUG=False`
+* `DEBUG=False`
 * Configure `ALLOWED_HOSTS`
 * Use a strong Django Secret Key
 * Use secure database credentials
-* Configure HTTPS
+* Use HTTPS
 * Restrict CORS origins
+* Configure trusted CSRF origins
+* Store secrets using environment variables
 
 ---
 
 # Current Project Status
 
 ```text
-Authentication & Roles        Complete
-Admin Dashboard               Complete
-Manager Dashboard             Complete
-Employee Dashboard            Complete
-Products                      Complete
-Sales & Billing               Complete
-Reports                       Complete
-Analytics                     Complete
-REST API Integration          Complete
-Frontend Integration          Complete
-Machine Learning Prediction   Implemented
-Professional UI               Implemented
+Authentication & Roles          Complete
+Admin Dashboard                 Complete
+Manager Dashboard               Complete
+Employee Dashboard              Complete
+Products                        Complete
+Sales & Billing                 Complete
+Reports                         Complete
+Analytics                       Complete
+REST API Integration            Complete
+Frontend Integration            Complete
+Machine Learning Prediction     Implemented
+Professional UI                 Implemented
+Render Frontend Deployment      Complete
+Render Backend Deployment       Complete
+PostgreSQL Production Database  Complete
+Production Data Migration       Complete
+Production Role Testing         Complete
+GitHub Repository               Complete
 ```
+
+The application has been successfully deployed and tested in the production environment.
 
 ---
 
@@ -654,7 +801,6 @@ Professional UI               Implemented
 * AI Business Recommendations
 * Automated Alerts
 * Exportable Business Reports
-* Cloud Deployment
 * Advanced Analytics Dashboard
 * Mobile Application
 
@@ -666,6 +812,9 @@ Professional UI               Implemented
 
 Python Full Stack Developer
 
+GitHub:  
+https://github.com/rohini-mylapilli
+
 ---
 
 # License
@@ -676,4 +825,4 @@ The source code may be used and modified for personal learning and non-commercia
 
 Commercial use, redistribution, or claiming the project as original work without permission is not permitted.
 
-© 2026 Rohini Myalpilli. All rights reserved.
+**© 2026 Rohini Myalpilli. All rights reserved.**
