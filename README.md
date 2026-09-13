@@ -21,6 +21,24 @@ https://github.com/rohini-mylapilli/AI-Business-Intelligence-Platform
 
 ---
 
+# Application Preview
+
+The platform provides dedicated dashboards for Admin, Manager, and Employee roles with role-based access to business operations and analytics.
+
+## Admin Dashboard
+
+![Admin Dashboard](screenshots/ai-business-admin.png)
+
+## Manager Dashboard
+
+![Manager Dashboard](screenshots/ai-business-manager.png)
+
+## Employee Dashboard
+
+![Employee Dashboard](screenshots/ai-business-employee.png)
+
+---
+
 # Project Overview
 
 The **AI Business Intelligence Platform** is a full-stack business management and analytics application developed using **Python, Django, Django REST Framework, React.js, MySQL, PostgreSQL, and Machine Learning**.
@@ -82,13 +100,13 @@ The system enables users to:
                 Database Layer
                  /          \
                 /            \
-     MySQL (Local)     PostgreSQL (Production)
+       MySQL (Local)    PostgreSQL (Production)
                               |
-                      Analytics Module
+                       Analytics Module
                               |
                    Machine Learning Model
                               |
-                      Sales Prediction
+                       Sales Prediction
 ```
 
 ---
@@ -124,6 +142,11 @@ AI-Business-Intelligence-Platform/
 |   |
 |   |-- package.json
 |   `-- vite.config.js
+|
+|-- screenshots/
+|   |-- ai-business-admin.png
+|   |-- ai-business-manager.png
+|   `-- ai-business-employee.png
 |
 |-- .env
 |-- .gitignore
@@ -257,15 +280,13 @@ backend/ml/sales_prediction.py
 
 # User Roles
 
-The system supports three main user roles:
+The system supports three main user roles.
 
 ## Admin
 
-Admin has full system access.
+Admin has full system access and can:
 
-Admin can:
-
-* Access Admin Dashboard
+* Access the Admin Dashboard
 * Manage products
 * Manage sales
 * Manage daily reports
@@ -273,15 +294,11 @@ Admin can:
 * Review business performance
 * Access administrative operations
 
----
-
 ## Manager
 
-Manager has operational and monitoring access.
+Manager has operational and monitoring access and can:
 
-Manager can:
-
-* Access Manager Dashboard
+* Access the Manager Dashboard
 * View products
 * Add and edit permitted product information
 * Manage sales operations
@@ -289,15 +306,11 @@ Manager can:
 * View analytics
 * Monitor business performance
 
----
-
 ## Employee
 
-Employee has limited operational access.
+Employee has limited operational access and can:
 
-Employee can:
-
-* Access Employee Dashboard
+* Access the Employee Dashboard
 * View permitted products
 * Access permitted sales functionality
 * Create daily reports
@@ -309,8 +322,6 @@ Administrative functionality is restricted based on role permissions.
 ---
 
 # Frontend Pages
-
-The React frontend includes:
 
 ```text
 Login
@@ -483,11 +494,8 @@ Production security configuration includes:
 
 ```bash
 git clone https://github.com/rohini-mylapilli/AI-Business-Intelligence-Platform.git
-
 cd AI-Business-Intelligence-Platform
 ```
-
----
 
 ## Create Virtual Environment
 
@@ -497,8 +505,6 @@ cd AI-Business-Intelligence-Platform
 python -m venv venv
 venv\Scripts\activate
 ```
-
----
 
 ## Install Backend Dependencies
 
@@ -605,7 +611,7 @@ The application is deployed using Render.
 
 ## Frontend
 
-The React/Vite frontend is deployed as a **Render Static Site**.
+The React/Vite frontend is deployed as a **Render Static Site**:
 
 ```text
 https://ai-business-intelligence-platform-1.onrender.com
@@ -613,7 +619,7 @@ https://ai-business-intelligence-platform-1.onrender.com
 
 ## Backend
 
-The Django REST Framework backend is deployed as a **Render Web Service** using Gunicorn.
+The Django REST Framework backend is deployed as a **Render Web Service** using Gunicorn:
 
 ```text
 https://ai-business-intelligence-platform-0fkp.onrender.com
@@ -623,11 +629,9 @@ https://ai-business-intelligence-platform-0fkp.onrender.com
 
 Production data is stored in **Render PostgreSQL**.
 
-The project therefore uses:
-
 ```text
-Local Development  -> MySQL
-Production         -> PostgreSQL
+Local Development -> MySQL
+Production        -> PostgreSQL
 ```
 
 This separation allows local development and testing without affecting production data.
