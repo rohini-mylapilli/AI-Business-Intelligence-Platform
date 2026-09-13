@@ -15,6 +15,16 @@ https://ai-business-intelligence-platform-0fkp.onrender.com
 **Source Code:**  
 https://github.com/rohini-mylapilli/AI-Business-Intelligence-Platform
 
+### Demo Login
+
+Recruiters and reviewers can explore the live application using the following demo account:
+
+**Username:** `demo`  
+**Password:** `Demo@2026`  
+**Role:** Employee
+
+> This is a limited-access demonstration account. Administrative and management functionality is protected through role-based permissions.
+
 > The application is deployed on Render. PostgreSQL is used as the production database, while MySQL is used for local development.
 
 > The backend is hosted on Render's free service and may take a short time to wake up after a period of inactivity.
